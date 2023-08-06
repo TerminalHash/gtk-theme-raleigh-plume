@@ -1,0 +1,14 @@
+/* Expanders */
+
+expander title:hover
+{
+	background-color: @hover_bg_color;
+}
+
+expander > title > arrow
+{
+	background-position: center;
+	background-repeat: no-repeat;
+	min-width: 14px;
+	min-height: 14px;
+}

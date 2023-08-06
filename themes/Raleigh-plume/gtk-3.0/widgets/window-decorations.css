@@ -1,0 +1,73 @@
+/* Window decorations and titlebars */
+
+/*
+ * For windows that have no server-side or window manager decorations, use
+ * the decorative border for menus.
+ */
+* > decoration
+{
+	border-image-width: 2px;
+	border-image-slice: 2;
+	padding: 2px;
+}
+
+/* Workaround to avoid double decorations around menus and tooltips */
+.popup > decoration,
+tooltip > decoration
+{
+	border: none;
+	padding: 0;
+}
+
+
+/*
+ * Title bars and window titles.
+ */
+
+.titlebar:not(headerbar), headerbar
+{
+	background-color: @titlebar_color;
+	border-image-source: url('../../gtk-assets/common/borders/progress-border.png');
+	border-image-width: 1px 2px 2px 1px;
+	border-image-slice: 1 2 2 1;
+	margin: -2px -2px 0 -2px;
+	padding: 1px 6px;
+	min-height: 24px;
+}
+
+.titlebar:backdrop:not(headerbar), headerbar:backdrop
+{
+	background-color: @bg_color;
+	border-image-source: url('.themes/Raleigh-Dark/gtk-assets/dark/borders/border.png');
+}
+
+.titlebar .title,
+.titlebar .subtitle
+{
+	color: @selected_fg_color;
+}
+
+.titlebar:backdrop .title,
+.titlebar:backdrop .subtitle
+{
+	color: @fg_color;
+}
+
+.titlebar .title
+{
+	font-weight: bold;
+}
+.titlebar .subtitle
+{
+	font-size: smaller;
+}
+
+/*
+ * As much as you may dislike symbolic icons, non-symbolic icons usually look
+ * awful as title button icons (minimize, close, ...), so add a special
+ * exception for title buttons.
+ */
+.titlebar .titlebutton > image
+{
+	-gtk-icon-style: symbolic;
+}

@@ -1,0 +1,173 @@
+/* Views:  Text views, tree views, GtkEntry, list boxes, calendars */
+
+
+/*
+ * The most basic and generic styling: give every view widget an appropriate
+ * background color -- often white for light themes and black or dark gray
+ * for dark themes.
+ */
+calendar.view,
+treeview,
+iconview,
+list,
+textview,
+entry,
+.entry
+{
+	background-color: @color_2;
+}
+
+calendar.view:disabled,
+treeview:disabled,
+iconview:disabled,
+list:disabled,
+textview:disabled,
+entry:disabled,
+.entry:disabled
+{
+	background-color: @hover_bg_color;
+}
+
+entry,
+.entry,
+textview,
+:not(stack) > list
+{
+	border-image-width: 2px;
+	border-image-slice: 2;
+}
+
+/* Treeviews */
+
+treeview header button,
+treeview header button:hover
+{
+	padding: 6px;
+	padding-top: 5px;
+}
+
+treeview.separator
+{
+	min-height: 3px;
+}
+
+/*
+ * XXX:
+ *
+ * Unfortunately, the way GTK+ 3 draws tree views is severely broken.  Each
+ * cell in the tree view is drawn using the exact "widget path" (position in
+ * the widget hierarchy) as the tree view itself.
+ *
+ * Because of this, there is no way for CSS code to know whether the tree view
+ * itself is unfocused, or if just the cell in question is unfocused.  There's
+ * a difference between the two conditions:  Ideally, if the tree view is
+ * unfocused, all selected cells should be drawn in a shade of gray; if the
+ * tree view is focused, the selected cells should be drawn in the selected
+ * background color.  However, only one row of cells in the tree view can be
+ * focused at one time; so even if the tree view has focus, if multiple rows
+ * are selected, only one row will be colored in the selected background
+ * color.  The rest of the selected rows will be gray, which looks totally
+ * wrong.
+ *
+ * For the time being, unless someone has a solution to this problem, simply
+ * always display selected cells in the selected background color; never gray
+ * out any cells even if the treeview is unfocused.
+ */
+treeview:selected:not(:focus),
+treeview:selected:not(:focus) *
+{
+	background-color: @selected_bg_color;
+	color: @selected_fg_color;
+}
+
+
+/*
+ * List widgets.
+ *
+ * While GTK+ 1 had dedicated list widgets as opposed to tree widgets,
+ * the simple list widget was deprecated in GTK+ 2, after the treeview
+ * was introduced.  The objective here therefore is to try to mimic the
+ * appearance of the treeview wherever possible, except for treeview
+ * bugs, of course.
+ */
+
+list
+{
+	padding: 2px 4px;
+}
+
+list > row
+{
+	padding: 2px;
+}
+
+
+/* Entry widgets */
+
+entry,
+.entry
+{
+	padding: 4px;
+}
+
+entry progress
+{
+	background: @bg_color;
+	border-image-width: 1px 2px 2px 1px;
+	border-image-slice: 1 2 2 1;
+	margin: -1px -2px -2px -1px;
+}
+
+/*
+ * Normally, any widget that is selected and focused will have a background of
+ * @selected_bg_color, and any widget that is selected but not focused will
+ * be colored @selected_unfocused_bg_color.  "Completion" pop-ups from entry
+ * widgets are composed of a treeview inside a pop-up window; whenever the
+ * user hovers the mouse over one of the completion entries, it implicitly
+ * selects that entry in the treeview, but does not focus it.  This will color
+ * the hovered item gray instead of blue, whereas GTK+ 2 Raleigh colored the
+ * items blue anyway.  So add an override to color completion entries blue.
+ */
+entry > window treeview.view:selected
+{
+	background-color: @selected_bg_color;
+	color: @selected_fg_color;
+}
+
+
+/* Calendars */
+
+calendar
+{
+	border-image-width: 2px 1px 1px 2px;
+	border-image-slice: 2 1 1 2;
+}
+
+calendar:indeterminate
+{
+	color: @insensitive_fg_color;
+}
+
+calendar.highlight
+{
+	background-color: @selected_bg_color;
+	color: @selected_fg_color;
+}
+
+calendar.header
+{
+	background-color: @bg_color;
+	border-image-width: 1px 2px 2px 1px;
+	border-image-slice: 1 2 2 1;
+}
+
+/* Calendar buttons for navigating to previous / subsequent months and years */
+calendar.button
+{
+	background-color: @bg_color;
+}
+
+calendar.button:hover
+{
+	background-color: @hover_bg_color;
+}

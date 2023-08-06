@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=Raleigh-plume
+Comment=A theme which closely mimics Red Hat's Raleigh GTK+ theme from ~2002, with plume colors
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=Raleigh-plume
+MetacityTheme=Raleigh-plume
+IconTheme=Raleigh
+NotificationTheme=standard

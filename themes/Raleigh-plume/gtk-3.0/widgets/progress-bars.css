@@ -1,0 +1,60 @@
+/* Progress bars */
+
+progressbar.horizontal trough,
+progressbar.horizontal progress,
+.trough.horizontal,
+.progressbar.horizontal
+{
+	min-height: 24px;
+}
+
+progressbar.vertical trough,
+progressbar.vertical progress,
+.trough.vertical,
+.progressbar.vertical
+{
+	min-width: 24px;
+}
+
+progressbar trough,
+levelbar trough,
+.trough
+{
+	background-color: @color_3;
+	border-width: 1px;
+	border-style: solid;
+	border-color: @dark_base_color @light_base_color @light_base_color @dark_base_color;
+}
+
+progressbar > trough:not(.empty) > progress,
+levelbar progress:not(.empty),
+.progressbar
+{
+	background-color: @selected_bg_color;
+	border-image-source: url('../../gtk-assets/common/borders/progress-border.png');
+	border-image-width: 1px 2px 2px 1px;
+	border-image-slice: 1 2 2 1;
+}
+
+
+/*
+ * A special exception:  If the progress bar is embedded in a status bar,
+ * don't make the progress bar taller than the status bar.
+ *
+ * Also, level bars should not be as tall as ordinary progress bars.
+ */
+statusbar progressbar.horizontal trough,
+statusbar progressbar.horizontal progress,
+levelbar.horizontal trough,
+levelbar.horizontal progress
+{
+	min-height: 16px;
+}
+
+statusbar progressbar.vertical trough,
+statusbar progressbar.vertical progress,
+levelbar.vertical trough,
+levelbar.vertical progress
+{
+	min-width: 16px;
+}
